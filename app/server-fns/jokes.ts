@@ -4,7 +4,7 @@ import type { Joke, JokesData } from "~/types";
 
 import { z } from "zod/v4";
 
-const JOKES_FILE = "app/data/jokes.json";
+const JOKES_FILE = "public/data/jokes.json";
 
 const NewJoke = z.object({
 	question: z.string(),
