@@ -1,27 +1,29 @@
 {
-  "name": "tsstart",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.8.1",
-  "devDependencies": {
-    "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.5",
-    "@vitejs/plugin-react": "^4.4.1",
-    "typescript": "^5.8.3",
-    "vite-tsconfig-paths": "^5.1.4"
-  },
-  "dependencies": {
-    "@tanstack/react-router": "^1.120.5",
-    "@tanstack/react-start": "^1.120.5",
-    "vinxi": "^0.5.6",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
-  }
+	"name": "devjokes",
+	"description": "",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vinxi dev",
+		"build": "vinxi build",
+		"start": "vinxi start"
+	},
+	"devDependencies": {
+		"@types/react": "^19.1.4",
+		"@types/react-dom": "^19.1.5",
+		"@vitejs/plugin-react": "^4.4.1",
+		"typescript": "^5.8.3",
+		"vite-tsconfig-paths": "^5.1.4"
+	},
+	"dependencies": {
+		"@tanstack/react-form": "^1.11.1",
+		"@tanstack/react-router": "^1.120.5",
+		"@tanstack/react-start": "^1.120.5",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
+		"vinxi": "^0.5.6",
+		"zod": "3.25.0-beta.20250517T081109"
+	},
+	"packageManager": "pnpm@10.8.1"
 }
