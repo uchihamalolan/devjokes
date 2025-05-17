@@ -6,6 +6,8 @@ import {
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
+import mainCss from "~/index.css?url";
+
 const RootDocument = ({ children }: Readonly<{ children: ReactNode }>) => {
 	return (
 		<html lang="en">
@@ -40,6 +42,12 @@ export const Route = createRootRoute({
 			},
 			{
 				title: "TanStack Start Starter",
+			},
+		],
+		links: [
+			{
+				rel: "stylesheet",
+				href: mainCss,
 			},
 		],
 	}),
