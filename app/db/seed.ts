@@ -1,5 +1,5 @@
 import { seed } from "drizzle-seed";
-import { db } from "./neon";
+import { db } from "./db";
 import * as schema from "./schema";
 
 async function main() {

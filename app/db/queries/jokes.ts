@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod";
 
-import { db } from "../neon";
+import { db } from "../db";
 import { jokes } from "../schema";
 
 const insertUserSchema = createInsertSchema(jokes);
