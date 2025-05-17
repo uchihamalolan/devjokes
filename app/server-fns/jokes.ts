@@ -1,10 +1,9 @@
-import * as fs from "node:fs";
 import { createServerFn } from "@tanstack/react-start";
-import type { Joke, JokesData } from "~/types";
+import type { Joke } from "~/types";
 
+import { notFound } from "@tanstack/react-router";
 import { z } from "zod/v4";
-
-const JOKES_FILE = "public/data/jokes.json";
+import { redis } from "~/db/redis";
 
 const NewJoke = z.object({
 	question: z.string(),
@@ -12,8 +11,11 @@ const NewJoke = z.object({
 });
 
 export const getJokes = createServerFn({ method: "GET" }).handler(async () => {
-	const jokes = await fs.promises.readFile(JOKES_FILE, "utf-8");
-	return JSON.parse(jokes) as JokesData;
+	const jokes = await redis.get<Joke[]>("jokes");
+
+	if (!jokes) throw notFound();
+
+	return jokes;
 });
 
 export const addJoke = createServerFn({ method: "POST" })
@@ -36,11 +38,7 @@ export const addJoke = createServerFn({ method: "POST" })
 			const updatedJokes = [...jokesData, newJoke];
 
 			// Write the updated jokes back to the file
-			await fs.promises.writeFile(
-				JOKES_FILE,
-				JSON.stringify(updatedJokes, null, 2),
-				"utf-8",
-			);
+			await redis.set("jokes", updatedJokes);
 
 			return newJoke;
 		} catch (error) {

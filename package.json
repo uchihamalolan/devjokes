@@ -23,6 +23,7 @@
 		"@tanstack/react-form": "^1.11.1",
 		"@tanstack/react-router": "^1.120.5",
 		"@tanstack/react-start": "^1.120.5",
+		"@upstash/redis": "^1.34.9",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"tailwindcss": "^4.1.7",

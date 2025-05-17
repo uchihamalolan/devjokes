@@ -3,5 +3,3 @@ export interface Joke {
 	question: string;
 	answer: string;
 }
-
-export type JokesData = Joke[];
