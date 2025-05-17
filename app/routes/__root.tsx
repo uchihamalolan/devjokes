@@ -41,6 +41,10 @@ export const Route = createRootRoute({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
+				name: "description",
+				content: "A demo app to test tanstack start capabilities",
+			},
+			{
 				title: "TanStack Start Starter",
 			},
 		],
