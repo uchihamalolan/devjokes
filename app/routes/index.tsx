@@ -1,4 +1,4 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { JokeForm } from "~/components/joke-form";
 import { JokesList } from "~/components/jokes-list";
@@ -22,4 +22,5 @@ export const Route = createFileRoute("/")({
 		// Load jokes data when the route is accessed
 		return getJokes();
 	},
+	notFoundComponent: () => <h1>Not Found</h1>,
 });

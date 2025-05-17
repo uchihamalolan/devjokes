@@ -13,7 +13,7 @@ const NewJoke = z.object({
 export const getJokes = createServerFn({ method: "GET" }).handler(async () => {
 	const jokes = await redis.get<Joke[]>("jokes");
 
-	if (!jokes) throw notFound();
+	if (!jokes) return [];
 
 	return jokes;
 });
