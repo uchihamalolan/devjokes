@@ -1,4 +1,4 @@
-import type { Joke } from "../types";
+import type { Joke } from "~/db/queries/jokes";
 
 interface JokesListProps {
 	jokes: Joke[];

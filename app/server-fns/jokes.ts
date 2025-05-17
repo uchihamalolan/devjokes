@@ -1,9 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
-import type { Joke } from "~/types";
-
-import { notFound } from "@tanstack/react-router";
 import { z } from "zod/v4";
-import { redis } from "~/db/redis";
+
+import { createJoke, getJokes as getJokesFromDb } from "~/db/queries/jokes";
 
 const NewJoke = z.object({
 	question: z.string(),
@@ -11,7 +9,7 @@ const NewJoke = z.object({
 });
 
 export const getJokes = createServerFn({ method: "GET" }).handler(async () => {
-	const jokes = await redis.get<Joke[]>("jokes");
+	const jokes = await getJokesFromDb();
 
 	if (!jokes) return [];
 
@@ -24,23 +22,8 @@ export const addJoke = createServerFn({ method: "POST" })
 	})
 	.handler(async ({ data }) => {
 		try {
-			// Read the existing jokes from the file
-			const jokesData = await getJokes();
-
-			// Create a new joke with a unique ID
-			const newJoke: Joke = {
-				id: crypto.randomUUID(),
-				question: data.question,
-				answer: data.answer,
-			};
-
-			// Add the new joke to the list
-			const updatedJokes = [...jokesData, newJoke];
-
-			// Write the updated jokes back to the file
-			await redis.set("jokes", updatedJokes);
-
-			return newJoke;
+			const savedNewJoke = await createJoke(data);
+			return savedNewJoke[0];
 		} catch (error) {
 			console.error("Failed to add joke:", error);
 			throw new Error("Failed to add joke");
