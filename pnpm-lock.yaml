@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@tailwindcss/vite':
-        specifier: ^4.1.7
-        version: 4.1.7(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(tsx@4.19.4))
       '@tanstack/react-form':
         specifier: ^1.11.1
         version: 1.11.1(@tanstack/react-start@1.120.5(@tanstack/react-router@1.120.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/node@22.15.18)(db0@0.3.2)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(terser@5.39.2)(tsx@4.19.4)(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(tsx@4.19.4)))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(vinxi@0.5.6(@types/node@22.15.18)(db0@0.3.2)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(tsx@4.19.4))
@@ -29,13 +26,13 @@ importers:
       tailwindcss:
         specifier: ^4.1.7
         version: 4.1.7
-      vinxi:
-        specifier: ^0.5.6
-        version: 0.5.6(@types/node@22.15.18)(db0@0.3.2)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(tsx@4.19.4)
       zod:
         specifier: 3.25.0-beta.20250517T081109
         version: 3.25.0-beta.20250517T081109
     devDependencies:
+      '@tailwindcss/vite':
+        specifier: ^4.1.7
+        version: 4.1.7(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(tsx@4.19.4))
       '@types/react':
         specifier: ^19.1.4
         version: 19.1.4
@@ -45,9 +42,15 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.4.1
         version: 4.4.1(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(tsx@4.19.4))
+      daisyui:
+        specifier: ^5.0.35
+        version: 5.0.35
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
+      vinxi:
+        specifier: ^0.5.6
+        version: 0.5.6(@types/node@22.15.18)(db0@0.3.2)(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(tsx@4.19.4)
       vite-tsconfig-paths:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(tsx@4.19.4))
@@ -1689,6 +1692,9 @@ packages:
 
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==, tarball: https://packages.atlassian.com/api/npm/npm-remote/csstype/-/csstype-3.1.3.tgz}
+
+  daisyui@5.0.35:
+    resolution: {integrity: sha512-AWi11n/x5++mps55jcwrBf0Lmip1euWY0FYcH/05SFGmoqrU7S7/aIUWaiaeqlJ5EcmEZ/7zEY73aOxMv6hcIg==, tarball: https://packages.atlassian.com/api/npm/npm-remote/daisyui/-/daisyui-5.0.35.tgz}
 
   data-uri-to-buffer@4.0.1:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==, tarball: https://packages.atlassian.com/api/npm/npm-remote/data-uri-to-buffer/-/data-uri-to-buffer-4.0.1.tgz}
@@ -5686,6 +5692,8 @@ snapshots:
       uncrypto: 0.1.3
 
   csstype@3.1.3: {}
+
+  daisyui@5.0.35: {}
 
   data-uri-to-buffer@4.0.1: {}
 

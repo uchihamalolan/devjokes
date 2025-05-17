@@ -1,58 +1,100 @@
-import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
+import { useForm } from "@tanstack/react-form";
 import { useRouter } from "@tanstack/react-router";
-import { useState } from "react";
+import { z } from "zod/v4";
 
-const { fieldContext, formContext } = createFormHookContexts();
-
-const { useAppForm } = createFormHook({
-	fieldComponents: {},
-	formComponents: {},
-	fieldContext,
-	formContext,
-});
+import { addJoke } from "~/server-fns/jokes";
 
 export function JokeForm() {
 	const router = useRouter();
-	const [question, setQuestion] = useState("");
-	const [answer, setAnswer] = useState("");
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [error, setError] = useState<string | null>(null);
+	const form = useForm({
+		defaultValues: {
+			question: "",
+			answer: "",
+		},
+		validators: {
+			onChange: z.object({
+				question: z.string().min(3),
+				answer: z.string().min(3),
+			}),
+		},
+		onSubmit: async ({ value }) => {
+			try {
+				await addJoke({
+					data: value,
+				});
+
+				form.reset();
+				router.invalidate();
+			} catch (e) {
+				console.error("Failed to add joke:", e);
+			}
+		},
+	});
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		form.handleSubmit();
+	};
+	const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		form.reset();
+	};
 
 	return (
-		<form onSubmit={handleSubmit} className="flex flex-row gap-2 mb-6">
-			{error && (
-				<div className="bg-red-100 text-red-700 p-2 rounded mb-4">{error}</div>
-			)}
+		<form
+			onSubmit={handleSubmit}
+			onReset={handleReset}
+			className="flex flex-row items-center gap-2 py-4"
+		>
+			<form.Field name="question">
+				{(field) => (
+					<input
+						placeholder="Enter joke question"
+						name={field.name}
+						value={field.state.value}
+						onBlur={field.handleBlur}
+						onChange={(e) => field.handleChange(e.target.value)}
+						type="text"
+						className="input"
+					/>
+				)}
+			</form.Field>
 
-			<div className="flex flex-col sm:flex-row gap-4 mb-8">
-				<input
-					id="question"
-					type="text"
-					placeholder="Enter joke question"
-					className="w-full p-2 border rounded focus:ring focus:ring-blue-300 flex-1"
-					value={question}
-					onChange={(e) => setQuestion(e.target.value)}
-					required
-				/>
+			<form.Field name="answer">
+				{(field) => (
+					<input
+						placeholder="Enter joke answer"
+						name={field.name}
+						value={field.state.value}
+						onBlur={field.handleBlur}
+						onChange={(e) => field.handleChange(e.target.value)}
+						type="text"
+						className="input"
+					/>
+				)}
+			</form.Field>
 
-				<input
-					id="answer"
-					type="text"
-					placeholder="Enter joke answer"
-					className="w-full p-2 border rounded focus:ring focus:ring-blue-300 flex-1 py-4"
-					value={answer}
-					onChange={(e) => setAnswer(e.target.value)}
-					required
-				/>
-
-				<button
-					type="submit"
-					disabled={isSubmitting}
-					className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded disabled:opacity-50 px-4"
-				>
-					{isSubmitting ? "Adding..." : "Add Joke"}
-				</button>
-			</div>
+			<form.Subscribe
+				selector={({ canSubmit, isSubmitting }) => ({
+					canSubmit,
+					isSubmitting,
+				})}
+			>
+				{({ canSubmit, isSubmitting }) => (
+					<div className="flex gap-2">
+						<button
+							className="btn btn-soft btn-success"
+							type="submit"
+							disabled={!canSubmit}
+						>
+							{isSubmitting ? "Adding..." : "Add Joke"}
+						</button>
+						<button className="btn btn-soft btn-error" type="reset">
+							Reset
+						</button>
+					</div>
+				)}
+			</form.Subscribe>
 		</form>
 	);
 }

@@ -6,21 +6,22 @@ interface JokesListProps {
 
 export function JokesList({ jokes }: JokesListProps) {
 	if (!jokes || jokes.length === 0) {
-		return <p className="text-gray-500 italic">No jokes found. Add some!</p>;
+		return <p>No jokes found. Add some!</p>;
 	}
 
 	return (
-		<div className="space-y-4">
-			<h2 className="text-xl font-semibold">Jokes Collection</h2>
-			{jokes.map((joke) => (
-				<div
-					key={joke.id}
-					className="bg-white p-4 rounded-lg shadow-md border border-gray-200"
-				>
-					<p className="font-bold text-lg mb-2">{joke.question}</p>
-					<p className="text-gray-700">{joke.answer}</p>
-				</div>
-			))}
+		<div>
+			<h2 className="text-xl">Jokes Collection</h2>
+			<ul className="my-4 flex flex-col gap-2 w-5xl">
+				{jokes.map((joke) => (
+					<li className="bg-base-300 p-4 rounded-box" key={joke.id}>
+						<p className="uppercase font-semibold opacity-60">
+							{joke.question}
+						</p>
+						<p className="list-col-wrap text-lg">{joke.answer}</p>
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 }
