@@ -22,7 +22,11 @@ export const addJoke = createServerFn({ method: "POST" })
 	})
 	.handler(async ({ data }) => {
 		try {
-			const savedNewJoke = await createJoke(data);
+			const joke = {
+				id: crypto.randomUUID(),
+				...data,
+			};
+			const savedNewJoke = await createJoke(joke);
 			return savedNewJoke[0];
 		} catch (error) {
 			console.error("Failed to add joke:", error);
